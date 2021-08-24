@@ -8,8 +8,9 @@ router.get('/', (req, res) => {
 });
 
 router.use('/auth', require('./auth'));
-router.use('/wow', require('./wow'));
+router.use('/feedback', require('./feedback'));
 router.use('/gear', require('./gear'));
 router.use('/recruitment', require('./recruitment'));
+router.use('/wow', require('./wow'));
 
 module.exports = router;
