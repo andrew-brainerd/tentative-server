@@ -10,6 +10,11 @@ const addGear = async (name, gear) => {
   return addedGear;
 };
 
+const getGear = async () => {
+  return await data.getDistinct(GEAR_COLLECTION, 'name');
+};
+
 module.exports = {
-  addGear
+  addGear,
+  getGear
 };

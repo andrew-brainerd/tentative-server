@@ -44,16 +44,18 @@ const insertOne = async (collectionName, document) => {
 
 const getSome = async (collectionName, page, size, query, projection = {}, sort = {}) => {
   const collection = db.collection(collectionName);
+  const totalSize = size || 0;
   const totalItems = await collection.countDocuments({});
   const totalPages = calculateTotalPages(totalItems, size);
   const sorting = sort || { $natural: -1 };
+  const pages = page || totalPages;
 
   return new Promise((resolve, reject) => {
     collection
       .find(query)
       .project(projection)
-      .skip(size * (page - 1))
-      .limit(size)
+      .skip(totalSize * (pages - 1))
+      .limit(totalSize)
       .sort(sorting)
       .toArray((err, items) => {
         err ? reject(err) : resolve({
@@ -105,6 +107,13 @@ const getAllByProperty = (collectionName, property, value) => {
   });
 };
 
+const getDistinct = (collectionName, field, query, options) => {
+  return new Promise(resolve => {
+    db.collection(collectionName).distinct(field, query, options)
+      .then(result => resolve(result));
+  });
+};
+
 const updateOne = async (collectionName, id, update) => {
   return new Promise((resolve, reject) => {
     try {
@@ -145,17 +154,17 @@ const updateMany = async (collectionName, query, update) => {
   });
 };
 
-const saveObject = async(collectionName, item) => {
+const saveObject = async (collectionName, item) => {
   return new Promise((resolve, reject) => {
     try {
       db.collection(collectionName)
         .update(
           { _id: item._id },
-          { $set: omit(item, '_id')},
+          { $set: omit(item, '_id') },
           { upsert: true },
           err => err ? reject(err) : resolve()
         );
-    } catch(err) {
+    } catch (err) {
       reject(err);
     }
   });
@@ -210,6 +219,7 @@ module.exports = {
   getByProperty,
   getByProperties,
   getAllByProperty,
+  getDistinct,
   updateOne,
   updateMany,
   saveObject,
