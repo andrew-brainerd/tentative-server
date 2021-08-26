@@ -1,7 +1,10 @@
 const Joi = require('joi');
 
 const postGearBody = Joi.object({
-  name: Joi.string().required(),
+  character: Joi.object({
+    characterName: Joi.string(),
+    characterClass: Joi.string()
+  }).required(),
   gear: Joi.array().required()
 });
 
