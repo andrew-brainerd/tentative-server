@@ -15,6 +15,11 @@ const addPlayer = async (toonName, toonRace, toonClass, toonSpec) => {
   return addedPlayer;
 };
 
+const getApplications = async () => {
+  return await data.getSome(RECRUITMENT_COLLECTION);
+};
+
 module.exports = {
-  addPlayer
+  addPlayer,
+  getApplications
 };

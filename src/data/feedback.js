@@ -10,6 +10,11 @@ const addFeedback = async (name, suggestion) => {
   return addedGear;
 };
 
+const getSuggestions = async () => {
+  return await data.getSome(FEEDBACK_COLLECTION);
+};
+
 module.exports = {
-  addFeedback
+  addFeedback,
+  getSuggestions
 };
