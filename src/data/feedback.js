@@ -5,7 +5,7 @@ const { FEEDBACK_COLLECTION } = require('../constants/collections');
 const addFeedback = async (name, suggestion) => {
   log.cool(`Adding suggestion from ${name} to feedback`);
 
-  const addedGear = await data.insertOne(GEAR_COLLECTION, { name, suggestion });
+  const addedGear = await data.insertOne(FEEDBACK_COLLECTION, { name, suggestion });
 
   return addedGear;
 };

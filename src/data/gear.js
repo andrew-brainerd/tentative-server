@@ -1,9 +1,7 @@
 const data = require('../utils/data');
-const log = require('../utils/log');
 const { GEAR_COLLECTION } = require('../constants/collections');
 
 const addGear = async (character, gear) => {
-  log.info('Adding gear for ', character);
   return await data.insertOne(GEAR_COLLECTION, { character, gear });
 };
 
