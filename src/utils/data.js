@@ -42,7 +42,7 @@ const insertOne = async (collectionName, document) => {
   });
 };
 
-const getSome = async (collectionName, page, size, query, projection = {}, sort = {}) => {
+const getSome = async (collectionName, page, size, query, projection = {}, sort) => {
   const collection = db.collection(collectionName);
   const totalSize = size || 0;
   const totalItems = await collection.countDocuments({});
