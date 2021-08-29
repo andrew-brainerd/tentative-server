@@ -1,5 +1,6 @@
 const guild = require('express').Router();
 const status = require('../utils/statusMessages');
+const { sortList } = require('../utils/sort');
 const { updateGuild, getGuild } = require('../data/guild');
 const { validator } = require('../utils/validator');
 const { postGuildBody } = require('./validation/guild');
@@ -13,9 +14,13 @@ guild.post('/', validator.body(postGuildBody), async (req, res) => {
 });
 
 guild.get('/', async (req, res) => {
-  const guildData = await getGuild();
+  const { query: { sort, direction } } = req;
 
-  return status.created(res, { guild: guildData.items[0].guild });
+  const guildData = await getGuild();
+  const memberList = guildData.items[0].guild.filter(member => member.name);
+  const sortedMembers = sortList(memberList, sort, direction);
+
+  return status.created(res, { guild: sortedMembers });
 });
 
 module.exports = guild;
