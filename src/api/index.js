@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 router.use('/auth', require('./auth'));
 router.use('/feedback', require('./feedback'));
 router.use('/gear', require('./gear'));
+router.use('/guild', require('./guild'));
 router.use('/recruitment', require('./recruitment'));
 router.use('/wow', require('./wow'));
 

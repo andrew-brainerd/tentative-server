@@ -1,9 +1,11 @@
 const FEEDBACK_COLLECTION = 'feedback';
 const GEAR_COLLECTION = 'gear';
+const GUILD_COLLECTION = 'guild';
 const RECRUITMENT_COLLECTION = 'recruitment';
 
 module.exports = {
   FEEDBACK_COLLECTION,
   GEAR_COLLECTION,
+  GUILD_COLLECTION,
   RECRUITMENT_COLLECTION
 };
