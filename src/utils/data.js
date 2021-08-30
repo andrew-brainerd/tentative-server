@@ -81,6 +81,7 @@ const getByProperty = (collectionName, property, value) => {
   return new Promise((resolve, reject) => {
     db.collection(collectionName)
       .find({ [property]: value })
+      .sort({ $natural: -1 })
       .toArray((err, result) =>
         err ? reject(err) : resolve(result[0])
       );
@@ -91,6 +92,7 @@ const getByProperties = (collectionName, query) => {
   return new Promise((resolve, reject) => {
     db.collection(collectionName)
       .find(query)
+      .sort({ $natural: -1 })
       .toArray((err, result) =>
         err ? reject(err) : resolve(result[0])
       );
@@ -101,6 +103,7 @@ const getAllByProperty = (collectionName, property, value) => {
   return new Promise((resolve, reject) => {
     db.collection(collectionName)
       .find({ [property]: value })
+      .sort({ $natural: -1 })
       .toArray((err, result) =>
         err ? reject(err) : resolve(result)
       );
